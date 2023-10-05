@@ -1,6 +1,6 @@
-package sistemaa1poo;
+package Main;
 
-public class SistemaA1POO {
+public class Main {
 
     public static void main(String[] args) {
     }
