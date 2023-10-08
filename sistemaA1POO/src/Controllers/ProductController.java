@@ -5,6 +5,8 @@
 package Controllers;
 
 import Dao.ProductDao;
+import Exceptions.InvalidIdException;
+import Exceptions.ModelNotCreatedExeception;
 import Models.Product;
 import java.util.ArrayList;
 
@@ -22,7 +24,7 @@ public class ProductController {
     
     public void delete(Product product) throws Exception {
         if(product.id == -1) {
-            throw new Exception("invalid id");
+            throw new InvalidIdException("invalid id");
         }
         
         ProductDao productDao =  new ProductDao();
@@ -34,13 +36,13 @@ public class ProductController {
             products.remove(productIndex);
             productDao.update(products);
         } else {
-            throw new Exception("product is not created");
+            throw new ModelNotCreatedExeception("product is not created");
         }
     }
     
     public Product update(Product product) throws Exception {
         if(product.id == -1) {
-            throw new Exception("invalid id");
+            throw new InvalidIdException("invalid id");
         }
         
         ProductDao productDao =  new ProductDao();
@@ -52,7 +54,7 @@ public class ProductController {
             products.add(productIndex, product);
             productDao.update(products);
         } else {
-            throw new Exception("product is not created");
+            throw new ModelNotCreatedExeception("product is not created");
         }
         
         return product;
@@ -62,5 +64,14 @@ public class ProductController {
         ProductDao productDao =  new ProductDao();
         ArrayList<Product> products = productDao.get();
         return products;
+    }
+    
+    public Product getByProduct(Product product) {
+        ProductDao productDao =  new ProductDao();
+        ArrayList<Product> products = productDao.get();
+        
+        int productIndex = products.indexOf(product);
+        
+        return productIndex > -1 ? products.get(productIndex) : null;
     }
 }

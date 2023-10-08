@@ -4,14 +4,21 @@
  */
 package Models;
 
+import java.io.Serializable;
+
 /**
  *
  * @author msmeneze
  */
-public class Stock {
+public class Stock implements Serializable {
     public int id;
     public Product product;
     public int quantity;
+    
+    public Stock(Product product, int quantity) {
+        this.product = product;
+        this.quantity = quantity;
+    }
 
     public Stock(int id, Product product, int quantity) {
         this.id = id;
@@ -19,7 +26,7 @@ public class Stock {
         this.quantity = quantity;
     }
     
-     @Override
+    @Override
     public boolean equals(Object obj) {
          if (this == obj) {
             return true;
@@ -49,5 +56,7 @@ public class Stock {
         result = prime * result + product.hashCode();
         return result;
     }
+    
+    
     
 }

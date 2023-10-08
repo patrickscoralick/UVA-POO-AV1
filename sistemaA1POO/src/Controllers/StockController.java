@@ -6,6 +6,9 @@ package Controllers;
 
 import Dao.ProductDao;
 import Dao.StockDao;
+import Exceptions.InvalidIdException;
+import Exceptions.InvalidQuantityExeception;
+import Exceptions.ModelNotCreatedExeception;
 import Models.Product;
 import Models.Stock;
 import java.util.ArrayList;
@@ -23,11 +26,11 @@ public class StockController {
        
        
        if(!products.contains(stock.product)) {
-           throw new Exception("Product is not exist");
+           throw new ModelNotCreatedExeception("Product is not exist");
        }
        
        if(stock.quantity < 1) {
-           throw new Exception("The quantity must be greater than 0");
+           throw new InvalidQuantityExeception("The quantity must be greater than 0");
        }
        
         StockDao stockDao = new StockDao();
@@ -38,7 +41,7 @@ public class StockController {
     
     public void delete(Stock stock) throws Exception {
         if(stock.id == -1) {
-            throw new Exception("invalid id");
+            throw new InvalidIdException("invalid id");
         }
         
         StockDao stockDao = new StockDao();
@@ -55,10 +58,14 @@ public class StockController {
     }
     
     
-    public Stock update(Stock stock) throws Exception {
+    public Stock update(Stock stock) throws InvalidQuantityExeception, InvalidIdException, ModelNotCreatedExeception {
          if(stock.id == -1) {
-            throw new Exception("invalid id");
+            throw new InvalidIdException("invalid id");
         }
+         
+         if(stock.quantity < 0) {
+             throw new InvalidQuantityExeception("invalid quantity");
+         }
          
          StockDao stockDao = new StockDao();
          ArrayList<Stock> stocks = stockDao.get();
@@ -69,7 +76,7 @@ public class StockController {
             stocks.add(stockIndex, stock);
             stockDao.update(stocks);
         } else {
-            throw new Exception("stock is not created");
+            throw new ModelNotCreatedExeception("stock is not created");
         }
         
         return stock;  
@@ -78,5 +85,28 @@ public class StockController {
     public ArrayList<Stock> get() {
         StockDao stockDao = new StockDao();
         return stockDao.get();
+    }
+    
+    public Stock getByStock(Stock stock) {
+        StockDao stockDao = new StockDao();
+        ArrayList<Stock> stocks = stockDao.get();
+        
+        int stockPosition = stocks.indexOf(stock);
+       
+        return stockPosition > -1 ? stocks.get(stockPosition) : null;
+    }
+    
+    public Stock getByProduct(Product product) {
+        StockDao stockDao = new StockDao();
+        ArrayList<Stock> stocks = stockDao.get();
+        Stock findStock = null;
+        
+        for(int i=0; i<stocks.size(); i++){
+            if(stocks.get(i).product.equals(product)) {
+                findStock = stocks.get(i);
+                break;
+            }
+        }
+        return findStock;
     }
 }

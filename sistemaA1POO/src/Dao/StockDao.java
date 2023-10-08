@@ -55,7 +55,7 @@ public class StockDao {
         FileInputStream fi;
          ArrayList<Stock> stocks = new ArrayList<>();
         try {
-            fi = new FileInputStream("C:\\DataTemp\\data");
+            fi = new FileInputStream(path);
             try (ObjectInputStream oi = new ObjectInputStream(fi)) {
                ArrayList<Stock> stoksRead = (ArrayList<Stock>) oi.readObject();
                if(stoksRead != null) {

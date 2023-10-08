@@ -4,7 +4,7 @@
  */
 package Dao;
 
-import Models.Product;
+import Models.Order;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -17,49 +17,49 @@ import java.util.ArrayList;
  *
  * @author msmeneze
  */
-public class ProductDao {
+public class OrderDao {
     
-    private final String path = "C:\\DataTemp\\product";
-    public Product set(Product product){
+    private final String path = "C:\\DataTemp\\order";
+    public Order set(Order order){
         try {
-            ArrayList<Product> products = this.get();
-            product.id = products.size() + 1;
-            products.add(product);
+            ArrayList<Order> orders = this.get();
+            order.id = orders.size() + 1;
+            orders.add(order);
        
             
             FileOutputStream fileOut = new FileOutputStream(path);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(products);
+            objectOut.writeObject(orders);
             objectOut.close();
-            return product;
+            return order;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
     }
     
-    public ArrayList<Product> update(ArrayList<Product> products){
+    public ArrayList<Order> update(ArrayList<Order> orders){
         try {
             FileOutputStream fileOut = new FileOutputStream(path);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
-            objectOut.writeObject(products);
+            objectOut.writeObject(orders);
             objectOut.close();
-            return products;
+            return orders;
         } catch (Exception ex) {
             ex.printStackTrace();
             return null;
         }
     }
     
-    public ArrayList<Product> get() {
+    public ArrayList<Order> get() {
         FileInputStream fi;
-         ArrayList<Product> products = new ArrayList<>();
+         ArrayList<Order> orders = new ArrayList<>();
         try {
             fi = new FileInputStream(path);
             try (ObjectInputStream oi = new ObjectInputStream(fi)) {
-               ArrayList<Product> productsRead = (ArrayList<Product>) oi.readObject();
-               if(productsRead != null) {
-                   products = productsRead;
+               ArrayList<Order> ordersRead = (ArrayList<Order>) oi.readObject();
+               if(ordersRead != null) {
+                   orders = ordersRead;
                }
                
             }
@@ -71,6 +71,6 @@ public class ProductDao {
         } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
-        return products;
+        return orders;
     }
 }
