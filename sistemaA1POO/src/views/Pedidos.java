@@ -63,7 +63,7 @@ public class Pedidos extends javax.swing.JDialog {
             }
         });
 
-        jComboBox_TipoSuco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Refresco 300ml", "Refresco 500ml" }));
+        jComboBox_TipoSuco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Suco Laranja", "Suco Uva" }));
         jComboBox_TipoSuco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_TipoSucoActionPerformed(evt);
@@ -158,9 +158,9 @@ public class Pedidos extends javax.swing.JDialog {
                             .addComponent(jLabel_TipoSalgado)
                             .addComponent(jComboBox_TipoSalgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel_TipoSuco)
-                            .addComponent(jComboBox_TipoSuco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jComboBox_TipoSuco, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel_TipoSuco)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(62, 62, 62)
                         .addComponent(jCheckBox_EhPromocao)

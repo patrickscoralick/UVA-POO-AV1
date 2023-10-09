@@ -25,7 +25,6 @@ public class Menu extends javax.swing.JFrame {
         jLabel_subtitulo = new javax.swing.JLabel();
         jButton_pedidos = new javax.swing.JButton();
         jButton_estoque = new javax.swing.JButton();
-        jButton_logins = new javax.swing.JButton();
         jButton_salvar = new javax.swing.JButton();
         jButton_sair = new javax.swing.JButton();
         jDesktopPane_login = new javax.swing.JDesktopPane();
@@ -59,14 +58,6 @@ public class Menu extends javax.swing.JFrame {
         jButton_estoque.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_estoqueActionPerformed(evt);
-            }
-        });
-
-        jButton_logins.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
-        jButton_logins.setText("LOGINS");
-        jButton_logins.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton_loginsActionPerformed(evt);
             }
         });
 
@@ -132,8 +123,7 @@ public class Menu extends javax.swing.JFrame {
                             .addComponent(jButton_estoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton_pedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(3, 3, 3))
-                            .addComponent(jButton_logins, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(3, 3, 3)))
                         .addGap(381, 381, 381))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -145,12 +135,14 @@ public class Menu extends javax.swing.JFrame {
                         .addComponent(jDesktopPane_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel_titulo)
-                            .addComponent(jLabel_subtitulo))
+                        .addComponent(jLabel_subtitulo)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton_sair)))
                 .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel_titulo)
+                .addGap(349, 349, 349))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -162,15 +154,13 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jDesktopPane_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 229, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
                 .addComponent(jLabel_titulo)
-                .addGap(18, 18, 18)
+                .addGap(51, 51, 51)
                 .addComponent(jButton_pedidos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton_estoque)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton_logins)
-                .addGap(47, 47, 47)
+                .addGap(85, 85, 85)
                 .addComponent(jButton_salvar)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -191,10 +181,6 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_estoqueActionPerformed
 
-    private void jButton_loginsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_loginsActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_loginsActionPerformed
-
     private void jButton_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SairActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_SairActionPerformed
@@ -212,7 +198,6 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton_Entrar;
     private javax.swing.JButton jButton_Sair;
     private javax.swing.JButton jButton_estoque;
-    private javax.swing.JButton jButton_logins;
     private javax.swing.JButton jButton_pedidos;
     private javax.swing.JButton jButton_sair;
     private javax.swing.JButton jButton_salvar;
