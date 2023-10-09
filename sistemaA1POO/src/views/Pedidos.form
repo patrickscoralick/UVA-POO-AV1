@@ -52,7 +52,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="jLabel_TipoSuco" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
-                      <Component id="jComboBox_TipoSuco" max="32767" attributes="0"/>
+                      <Component id="jComboBox_TipoSuco" pref="147" max="32767" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace max="32767" attributes="0"/>
@@ -152,11 +152,10 @@
     <Component class="javax.swing.JComboBox" name="jComboBox_TipoSalgado">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="3">
+            <StringItem index="0" value="-"/>
+            <StringItem index="1" value="Salgado M&#xe9;dio"/>
+            <StringItem index="2" value="Salgad&#xe3;o"/>
           </StringArray>
         </Property>
       </Properties>
@@ -170,11 +169,10 @@
     <Component class="javax.swing.JComboBox" name="jComboBox_TipoSuco">
       <Properties>
         <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-          <StringArray count="4">
-            <StringItem index="0" value="Item 1"/>
-            <StringItem index="1" value="Item 2"/>
-            <StringItem index="2" value="Item 3"/>
-            <StringItem index="3" value="Item 4"/>
+          <StringArray count="3">
+            <StringItem index="0" value="-"/>
+            <StringItem index="1" value="Refresco 300ml"/>
+            <StringItem index="2" value="Refresco 500ml"/>
           </StringArray>
         </Property>
       </Properties>
