@@ -73,7 +73,7 @@ public class StockController {
          int stockIndex = stocks.indexOf(stock);
          
           if(stockIndex != -1) {
-            stocks.add(stockIndex, stock);
+            stocks.set(stockIndex, stock);
             stockDao.update(stocks);
         } else {
             throw new ModelNotCreatedExeception("stock is not created");

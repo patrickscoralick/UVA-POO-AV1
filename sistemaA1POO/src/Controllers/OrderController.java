@@ -109,7 +109,7 @@ public class OrderController {
          int orderIndex = orders.indexOf(order);
          
           if(orderIndex != -1) {
-            orders.add(orderIndex, order);
+            orders.set(orderIndex, order);
             orderDao.update(orders);
         } else {
             throw new ModelNotCreatedExeception("order is not created");

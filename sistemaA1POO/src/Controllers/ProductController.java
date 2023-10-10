@@ -51,7 +51,7 @@ public class ProductController {
         int productIndex = products.indexOf(product);
         
         if(productIndex != -1) {
-            products.add(productIndex, product);
+            products.set(productIndex, product);
             productDao.update(products);
         } else {
             throw new ModelNotCreatedExeception("product is not created");

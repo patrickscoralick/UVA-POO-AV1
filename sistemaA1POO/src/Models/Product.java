@@ -12,6 +12,7 @@ import java.io.Serializable;
  * @author msmeneze
  */
 public class Product implements Serializable {
+    private static final long serialVersionUID = 1L;
     public int id = -1;
     public String name;
     public String description;
@@ -58,6 +59,11 @@ public class Product implements Serializable {
         result = prime * result + id;
         return result;
     }
+    
+    @Override
+    public String toString() {
+        return name;
+   }
     
     
 

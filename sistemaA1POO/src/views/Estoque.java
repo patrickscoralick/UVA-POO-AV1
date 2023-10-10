@@ -4,11 +4,50 @@
  */
 package views;
 
+import Controllers.ProductController;
+import Controllers.StockController;
+import Exceptions.InvalidIdException;
+import Exceptions.InvalidQuantityExeception;
+import Exceptions.ModelNotCreatedExeception;
+import Models.Product;
+import Models.Stock;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JScrollPane;
+import javax.swing.JTable;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author patri
  */
 public class Estoque extends javax.swing.JDialog {
+    
+    public class Item {
+        private int id;
+        private Product product;
+
+        public Item(int id, Product product) {
+            this.id = id;
+            this.product = product;
+        }
+
+        
+        public int getId() {
+            return id;
+        }
+
+        @Override
+        public String toString() {
+            return product.name;
+        }
+    }
+   
 
     /**
      * Creates new form Estoque
@@ -16,6 +55,15 @@ public class Estoque extends javax.swing.JDialog {
     public Estoque(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        
+      
+       ProductController productController = new ProductController();
+       ArrayList<Product> products =  productController.get();
+        
+          
+        for(Product product: products) {
+            jComboBox1_Nome_Porduto.addItem(product);
+        }
     }
 
     /**
@@ -37,7 +85,7 @@ public class Estoque extends javax.swing.JDialog {
         jButton_ListarEstoque2 = new javax.swing.JButton();
         jButton_ListarEstoque1 = new javax.swing.JButton();
         jLabel_EstoqueSalgado1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox1_Nome_Porduto = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -47,6 +95,11 @@ public class Estoque extends javax.swing.JDialog {
         jButton_RegistroEstoque.setBackground(new java.awt.Color(0, 0, 0));
         jButton_RegistroEstoque.setForeground(new java.awt.Color(255, 255, 255));
         jButton_RegistroEstoque.setText("REGISTRAR");
+        jButton_RegistroEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_RegistroEstoqueActionPerformed(evt);
+            }
+        });
 
         jButton_ListarEstoque.setBackground(new java.awt.Color(0, 0, 0));
         jButton_ListarEstoque.setForeground(new java.awt.Color(255, 255, 255));
@@ -83,7 +136,6 @@ public class Estoque extends javax.swing.JDialog {
         jButton_ListarEstoque2.setBackground(new java.awt.Color(0, 0, 0));
         jButton_ListarEstoque2.setForeground(new java.awt.Color(255, 255, 255));
         jButton_ListarEstoque2.setText("EDITAR");
-        jButton_ListarEstoque2.setActionCommand("EDITAR");
         jButton_ListarEstoque2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton_ListarEstoque2ActionPerformed(evt);
@@ -102,10 +154,9 @@ public class Estoque extends javax.swing.JDialog {
 
         jLabel_EstoqueSalgado1.setText("Quantidade:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        jComboBox1_Nome_Porduto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                jComboBox1_Nome_PordutoActionPerformed(evt);
             }
         });
 
@@ -117,7 +168,7 @@ public class Estoque extends javax.swing.JDialog {
                 .addGap(39, 39, 39)
                 .addComponent(jLabel_EstoqueSalgado)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jComboBox1_Nome_Porduto, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel_EstoqueSalgado1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -151,7 +202,7 @@ public class Estoque extends javax.swing.JDialog {
                     .addComponent(jLabel_EstoqueSalgado)
                     .addComponent(jSpinner_Hamburguer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel_EstoqueSalgado1)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jComboBox1_Nome_Porduto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_RegistroEstoque)
@@ -167,20 +218,91 @@ public class Estoque extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_ListarEstoque2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ListarEstoque2ActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            int quantity = (int) jSpinner_Hamburguer.getValue();
+            Product product = (Product) jComboBox1_Nome_Porduto.getSelectedItem();
+            StockController stockController = new StockController();
+            Stock stock = stockController.getByProduct(product);
+            stock.quantity = quantity;
+            stockController.update(stock);
+            jButton_ListarEstoque.doClick();
+        } catch (InvalidQuantityExeception ex) {
+            Logger.getLogger(Estoque.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidIdException ex) {
+            Logger.getLogger(Estoque.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ModelNotCreatedExeception ex) {
+            Logger.getLogger(Estoque.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_jButton_ListarEstoque2ActionPerformed
 
     private void jButton_ListarEstoque1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ListarEstoque1ActionPerformed
-        // TODO add your handling code here:
+        try {
+            Product product = (Product) jComboBox1_Nome_Porduto.getSelectedItem();
+            StockController stockController = new StockController();
+            Stock stock = stockController.getByProduct(product);
+            stockController.delete(stock);
+            jButton_ListarEstoque.doClick();
+        } catch (Exception ex) {
+            Logger.getLogger(Estoque.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton_ListarEstoque1ActionPerformed
 
     private void jButton_ListarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ListarEstoqueActionPerformed
-        // TODO add your handling code here:
+ 
+        StockController stockController = new StockController();
+        
+        
+        ArrayList<Stock> stocks = stockController.get();
+        
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Produto");
+        modelo.addColumn("Quatidade");
+        
+        for (Stock stock : stocks) {
+            modelo.addRow(new Object[]{stock.product.name, stock.quantity});
+        }
+ 
+        jTable_EstoqueProdutos.setModel(modelo);
+        jTable_EstoqueProdutos.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int rowIndex = jTable_EstoqueProdutos.getSelectedRow();
+                if(rowIndex != -1) {
+                    StockController stockController = new StockController();
+                    ArrayList<Stock> stocks = stockController.get();
+                    Stock stock = stocks.get(rowIndex);
+
+                    jSpinner_Hamburguer.setValue(stock.quantity);
+                    jComboBox1_Nome_Porduto.setSelectedItem(stock.product);
+                }
+            }
+            
+        });
+          // Adicionar a tabela a um painel de rolagem
+  
     }//GEN-LAST:event_jButton_ListarEstoqueActionPerformed
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void jComboBox1_Nome_PordutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1_Nome_PordutoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_jComboBox1_Nome_PordutoActionPerformed
+
+    private void jButton_RegistroEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_RegistroEstoqueActionPerformed
+        try {
+            // TODO add your handling code here:
+            int quantity = (int) jSpinner_Hamburguer.getValue();
+            Product product = (Product) jComboBox1_Nome_Porduto.getSelectedItem();
+            
+            
+            StockController stockController = new StockController();
+            stockController.add(new Stock(product, quantity));
+            jButton_ListarEstoque.doClick();
+        } catch (Exception ex) {
+            Logger.getLogger(Estoque.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         
+    }//GEN-LAST:event_jButton_RegistroEstoqueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -229,7 +351,7 @@ public class Estoque extends javax.swing.JDialog {
     private javax.swing.JButton jButton_ListarEstoque1;
     private javax.swing.JButton jButton_ListarEstoque2;
     private javax.swing.JButton jButton_RegistroEstoque;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<Product> jComboBox1_Nome_Porduto;
     private javax.swing.JLabel jLabel_EstoqueSalgado;
     private javax.swing.JLabel jLabel_EstoqueSalgado1;
     private javax.swing.JLabel jLabel_TituloTelaPedido;

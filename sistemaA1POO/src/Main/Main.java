@@ -4,6 +4,7 @@ import Controllers.LoginController;
 import Controllers.OrderController;
 import Controllers.ProductController;
 import Controllers.StockController;
+import Enums.Type;
 import Models.Order;
 import Models.Product;
 import java.util.ArrayList;
@@ -18,21 +19,22 @@ public class Main {
         System.out.println(loginController.login("Admin", "1234567"));
         
         ProductController productController = new ProductController();
-        /*Product product1 = productController.add(new Product("Produto 1", "Produto 1", Type.DRINK, 233));
+   
+        Product product1 = productController.add(new Product("Produto 1", "Produto 1", Type.DRINK, 233));
         Product product2 = productController.add(new Product("Produto 2", "Produto 2", Type.SALT, 23));
         Product product3 = productController.add(new Product("Produto 3", "Produto 3", Type.SALT, 10));
-        System.out.println("Produto cirado com sucesso!");*/
+        System.out.println("Produto cirado com sucesso!");
         
         
         
-       StockController stockController = new StockController();
-        /* try {
+       /*StockController stockController = new StockController();
+         try {
             stockController.add(new Stock(product1, 10));
             stockController.add(new Stock(product2, 10));
             stockController.add(new Stock(product3, 10));
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        }
         
         ArrayList<Product> productsAll = productController.get();
         OrderController orderController = new OrderController();
@@ -51,7 +53,7 @@ public class Main {
             
         } catch (Exception ex) {
             Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        }*/
              
         
     }
