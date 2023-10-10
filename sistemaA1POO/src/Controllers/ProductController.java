@@ -74,4 +74,22 @@ public class ProductController {
         
         return productIndex > -1 ? products.get(productIndex) : null;
     }
+
+    public double ValorProduto(String nomeProduto, int quantidade) throws Exception {
+        ProductDao productDao = new ProductDao();
+        ArrayList<Product> products = productDao.get();
+
+        for (Product product : products) {
+            if (product.name.equalsIgnoreCase(nomeProduto)) {
+                if (quantidade > 0) {
+                    return product.price * quantidade;
+                } else {
+                    throw new IllegalArgumentException("A quantidade deve ser maior que zero.");
+                }
+            }
+        }
+
+        throw new IllegalArgumentException("Produto não cadastrado: " + nomeProduto);
+    }
+
 }
