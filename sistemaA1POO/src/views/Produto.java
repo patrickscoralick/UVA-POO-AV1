@@ -1,19 +1,20 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package views;
 
 /**
  *
- * @author msmeneze
+ * @author patri
  */
-public class Produto extends javax.swing.JFrame {
+public class Produto extends javax.swing.JDialog {
 
     /**
-     * Creates new form Produto
+     * Creates new form Pedidos
      */
-    public Produto() {
+    public Produto(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
     }
 
@@ -26,90 +27,218 @@ public class Produto extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
-        IdTextField = new javax.swing.JTextField();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        SalvarButton = new javax.swing.JButton();
-        jTextField5 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
-        jTextField3 = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
-        jButton4 = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        jLabel_TituloTelaPedido = new javax.swing.JLabel();
+        jLabel_NPedido = new javax.swing.JLabel();
+        jLabel_TipoSalgado = new javax.swing.JLabel();
+        jLabel_TipoSuco = new javax.swing.JLabel();
+        jComboBox_TipoSalgado = new javax.swing.JComboBox<>();
+        jTextField_NPedido = new javax.swing.JTextField();
+        jButton_Anotar = new javax.swing.JButton();
+        jButton_Listar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jButton_Editar = new javax.swing.JButton();
+        jButton_Editar1 = new javax.swing.JButton();
+        jLabel_NPedido1 = new javax.swing.JLabel();
+        jTextField_NPedido1 = new javax.swing.JTextField();
+        jLabel_TipoSalgado1 = new javax.swing.JLabel();
+        jTextField_NPedido2 = new javax.swing.JTextField();
+        jTextField_NPedido3 = new javax.swing.JTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setPreferredSize(new java.awt.Dimension(610, 250));
-        setSize(new java.awt.Dimension(610, 250));
-        getContentPane().setLayout(new java.awt.GridLayout(2, 0));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
-        jPanel1.setLayout(new java.awt.GridLayout(3, 3, 5, 5));
+        jLabel_TituloTelaPedido.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel_TituloTelaPedido.setText("CRIAR PRODUTO");
 
-        IdTextField.addActionListener(new java.awt.event.ActionListener() {
+        jLabel_NPedido.setText("Tipo:");
+
+        jLabel_TipoSalgado.setText("Nome Produto:");
+
+        jLabel_TipoSuco.setText("Descrição:");
+
+        jComboBox_TipoSalgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Salgado Médio", "Salgadão" }));
+        jComboBox_TipoSalgado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                IdTextFieldActionPerformed(evt);
+                jComboBox_TipoSalgadoActionPerformed(evt);
             }
         });
-        jPanel1.add(IdTextField);
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jPanel1.add(jComboBox1);
-
-        SalvarButton.setText("Salvar");
-        SalvarButton.addActionListener(new java.awt.event.ActionListener() {
+        jTextField_NPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                SalvarButtonActionPerformed(evt);
+                jTextField_NPedidoActionPerformed(evt);
             }
         });
-        jPanel1.add(SalvarButton);
-        jPanel1.add(jTextField5);
-        jPanel1.add(jTextField4);
 
-        jButton2.setText("Pesquisar");
-        jPanel1.add(jButton2);
-        jPanel1.add(jTextField3);
-        jPanel1.add(jSeparator1);
+        jButton_Anotar.setBackground(new java.awt.Color(0, 0, 0));
+        jButton_Anotar.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_Anotar.setText("REGISTRAR");
 
-        jButton4.setText("Excluir");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-        jPanel1.add(jButton4);
+        jButton_Listar.setBackground(new java.awt.Color(0, 0, 0));
+        jButton_Listar.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_Listar.setText("LISTAR");
 
-        getContentPane().add(jPanel1);
-
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null}
             },
             new String [] {
-                "Id", "Nome", "Descrição", "Tipo", "Preço"
+                "Id", "Tipo", "Descrição", "Produto", "Preço (R$)"
             }
-        ));
-        jScrollPane1.setViewportView(jTable1);
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class
+            };
 
-        getContentPane().add(jScrollPane1);
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        jButton_Editar.setBackground(new java.awt.Color(0, 0, 0));
+        jButton_Editar.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_Editar.setText("EDITAR");
+
+        jButton_Editar1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton_Editar1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_Editar1.setText("EXCLUIR");
+        jButton_Editar1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Editar1ActionPerformed(evt);
+            }
+        });
+
+        jLabel_NPedido1.setText("Id:");
+
+        jTextField_NPedido1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_NPedido1ActionPerformed(evt);
+            }
+        });
+
+        jLabel_TipoSalgado1.setText("Preço R$:");
+
+        jTextField_NPedido2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_NPedido2ActionPerformed(evt);
+            }
+        });
+
+        jTextField_NPedido3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextField_NPedido3ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(jLabel_TituloTelaPedido)
+                        .addGap(319, 319, 319))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jButton_Anotar)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jButton_Listar)
+                                .addGap(139, 139, 139)
+                                .addComponent(jButton_Editar)
+                                .addGap(127, 127, 127)
+                                .addComponent(jButton_Editar1)))
+                        .addGap(78, 78, 78))))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(125, 125, 125)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jLabel_TipoSalgado)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_NPedido2)
+                        .addGap(54, 54, 54))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jLabel_NPedido1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jTextField_NPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(jLabel_NPedido)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox_TipoSalgado, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel_TipoSalgado1)
+                    .addComponent(jLabel_TipoSuco))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jTextField_NPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField_NPedido3, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(78, 78, 78))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(jLabel_TituloTelaPedido)
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_NPedido1)
+                    .addComponent(jTextField_NPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_NPedido)
+                    .addComponent(jLabel_TipoSuco)
+                    .addComponent(jTextField_NPedido3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_TipoSalgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_TipoSalgado)
+                    .addComponent(jTextField_NPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_TipoSalgado1)
+                    .addComponent(jTextField_NPedido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton_Anotar)
+                    .addComponent(jButton_Listar)
+                    .addComponent(jButton_Editar)
+                    .addComponent(jButton_Editar1))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(25, Short.MAX_VALUE))
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void IdTextFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_IdTextFieldActionPerformed
+    private void jComboBox_TipoSalgadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_TipoSalgadoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_IdTextFieldActionPerformed
+    }//GEN-LAST:event_jComboBox_TipoSalgadoActionPerformed
 
-    private void SalvarButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalvarButtonActionPerformed
-        
-    }//GEN-LAST:event_SalvarButtonActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jTextField_NPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_NPedidoActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_jTextField_NPedidoActionPerformed
+
+    private void jButton_Editar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Editar1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_Editar1ActionPerformed
+
+    private void jTextField_NPedido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_NPedido1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_NPedido1ActionPerformed
+
+    private void jTextField_NPedido2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_NPedido2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_NPedido2ActionPerformed
+
+    private void jTextField_NPedido3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_NPedido3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jTextField_NPedido3ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -137,27 +266,42 @@ public class Produto extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Produto.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
 
-        /* Create and display the form */
+        /* Create and display the dialog */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new Produto().setVisible(true);
+                Produto dialog = new Produto(new javax.swing.JFrame(), true);
+                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
+                    @Override
+                    public void windowClosing(java.awt.event.WindowEvent e) {
+                        System.exit(0);
+                    }
+                });
+                dialog.setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField IdTextField;
-    private javax.swing.JButton SalvarButton;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
+    private javax.swing.JButton jButton_Anotar;
+    private javax.swing.JButton jButton_Editar;
+    private javax.swing.JButton jButton_Editar1;
+    private javax.swing.JButton jButton_Listar;
+    private javax.swing.JComboBox<String> jComboBox_TipoSalgado;
+    private javax.swing.JLabel jLabel_NPedido;
+    private javax.swing.JLabel jLabel_NPedido1;
+    private javax.swing.JLabel jLabel_TipoSalgado;
+    private javax.swing.JLabel jLabel_TipoSalgado1;
+    private javax.swing.JLabel jLabel_TipoSuco;
+    private javax.swing.JLabel jLabel_TituloTelaPedido;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTextField_NPedido;
+    private javax.swing.JTextField jTextField_NPedido1;
+    private javax.swing.JTextField jTextField_NPedido2;
+    private javax.swing.JTextField jTextField_NPedido3;
     // End of variables declaration//GEN-END:variables
 }
