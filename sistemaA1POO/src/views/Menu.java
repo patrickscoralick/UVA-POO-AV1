@@ -1,8 +1,7 @@
 package views;
 
 import java.awt.Image;
-import javax.swing.Icon;
-import javax.swing.ImageIcon;
+import javax.swing.*;
 
 public class Menu extends javax.swing.JFrame {
 
@@ -63,6 +62,13 @@ public class Menu extends javax.swing.JFrame {
         jLabel_IconeLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/UserIcone.png"))); // NOI18N
 
         jButton_Entrar.setText("ENTRAR");
+        jButton_Entrar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_EntrarActionPerformed(evt);
+            }
+        });
+
+
 
         jButton_Sair.setText("SAIR");
         jButton_Sair.addActionListener(new java.awt.event.ActionListener() {
@@ -184,6 +190,12 @@ public class Menu extends javax.swing.JFrame {
     private void jButton_estoque1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_estoque1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_estoque1ActionPerformed
+    private void jButton_EntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // Coloque a lógica de verificação de credenciais aqui
+        Login login = new Login(Menu.this, true);
+        login.setVisible(true);
+    }//GEN-LAST:event_jButton1ActionPerformed
+
 
     public static void main(String args[]) {
        

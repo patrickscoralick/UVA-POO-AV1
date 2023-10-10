@@ -40,6 +40,7 @@ public class Pedidos extends javax.swing.JDialog {
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jButton_Editar = new javax.swing.JButton();
+        jButton_Editar1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -94,6 +95,10 @@ public class Pedidos extends javax.swing.JDialog {
         jButton_Editar.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Editar.setText("EDITAR");
 
+        jButton_Editar1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton_Editar1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_Editar1.setText("EXCLUIR");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -121,18 +126,21 @@ public class Pedidos extends javax.swing.JDialog {
                         .addComponent(jLabel_TipoSuco)
                         .addGap(22, 22, 22)
                         .addComponent(jComboBox_TipoSuco, 0, 147, Short.MAX_VALUE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 188, Short.MAX_VALUE)
                         .addComponent(jCheckBox_EhPromocao, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(101, 101, 101))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(32, 32, 32)
                         .addComponent(jButton_Anotar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton_Listar)
-                        .addGap(18, 18, 18)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jButton_Editar)
-                        .addGap(78, 78, 78))))
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton_Editar1)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,7 +168,8 @@ public class Pedidos extends javax.swing.JDialog {
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jButton_Anotar)
                             .addComponent(jButton_Listar)
-                            .addComponent(jButton_Editar))))
+                            .addComponent(jButton_Editar)
+                            .addComponent(jButton_Editar1))))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
                 .addGap(19, 19, 19))
@@ -222,6 +231,7 @@ public class Pedidos extends javax.swing.JDialog {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_Anotar;
     private javax.swing.JButton jButton_Editar;
+    private javax.swing.JButton jButton_Editar1;
     private javax.swing.JButton jButton_Listar;
     private javax.swing.JCheckBox jCheckBox_EhPromocao;
     private javax.swing.JComboBox<String> jComboBox_TipoSalgado;

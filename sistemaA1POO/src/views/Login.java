@@ -3,19 +3,24 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package views;
+import Controllers.LoginController;
+
+import javax.swing.*;
 
 /**
  *
  * @author patri
  */
 public class Login extends javax.swing.JDialog {
-
+    private LoginController loginController;
+    private boolean loginBemSucedido = false;
     /**
      * Creates new form Login
      */
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        loginController = new LoginController();
     }
 
     /**
@@ -101,8 +106,19 @@ public class Login extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
+        String usuario = jTextField_usuario.getText();
+        String senha = new String(jPasswordField_Senha.getPassword());
+
+        boolean loginValido = loginController.login(usuario, senha);
+
+        if (loginValido){
+            loginBemSucedido = true;
+            dispose();
+        }else {
+            JOptionPane.showMessageDialog(this, "Usuario ou senha inválidos", "Erro de login", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
+
 
     /**
      * @param args the command line arguments

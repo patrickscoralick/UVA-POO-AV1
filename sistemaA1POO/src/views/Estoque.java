@@ -144,7 +144,7 @@ public class Estoque extends javax.swing.JDialog {
 
         jButton_ListarEstoque1.setBackground(new java.awt.Color(0, 0, 0));
         jButton_ListarEstoque1.setForeground(new java.awt.Color(255, 255, 255));
-        jButton_ListarEstoque1.setText("DELETAR");
+        jButton_ListarEstoque1.setText("EXCLUIR");
         jButton_ListarEstoque1.setToolTipText("");
         jButton_ListarEstoque1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
