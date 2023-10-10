@@ -23,7 +23,7 @@ public class Main {
         Product product1 = productController.add(new Product("Produto 1", "Produto 1", Type.DRINK, 233));
         Product product2 = productController.add(new Product("Produto 2", "Produto 2", Type.SALT, 23));
         Product product3 = productController.add(new Product("Produto 3", "Produto 3", Type.SALT, 10));
-        System.out.println("Produto cirado com sucesso!");
+        System.out.println("Produto criado com sucesso!");
         
         
         
