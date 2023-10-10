@@ -25,19 +25,18 @@ public class Menu extends javax.swing.JFrame {
         jLabel_subtitulo = new javax.swing.JLabel();
         jButton_pedidos = new javax.swing.JButton();
         jButton_estoque = new javax.swing.JButton();
-        jButton_salvar = new javax.swing.JButton();
-        jButton_sair = new javax.swing.JButton();
         jDesktopPane_login = new javax.swing.JDesktopPane();
         jLabel_IconeLogin = new javax.swing.JLabel();
         jButton_Entrar = new javax.swing.JButton();
         jButton_Sair = new javax.swing.JButton();
+        jButton_estoque1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel_logo_uva.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/LogoUVA.png"))); // NOI18N
 
         jLabel_titulo.setFont(new java.awt.Font("Segoe UI", 1, 36)); // NOI18N
-        jLabel_titulo.setForeground(new java.awt.Color(255, 255, 0));
+        jLabel_titulo.setForeground(new java.awt.Color(155, 0, 155));
         jLabel_titulo.setText("CANTINA'S");
         jLabel_titulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -60,12 +59,6 @@ public class Menu extends javax.swing.JFrame {
                 jButton_estoqueActionPerformed(evt);
             }
         });
-
-        jButton_salvar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/disqueteIcone.png"))); // NOI18N
-
-        jButton_sair.setBackground(new java.awt.Color(255, 0, 0));
-        jButton_sair.setForeground(new java.awt.Color(255, 255, 255));
-        jButton_sair.setText("Sair");
 
         jLabel_IconeLogin.setIcon(new javax.swing.ImageIcon(getClass().getResource("/MyImages/UserIcone.png"))); // NOI18N
 
@@ -111,6 +104,14 @@ public class Menu extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
+        jButton_estoque1.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        jButton_estoque1.setText("PRODUTO");
+        jButton_estoque1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_estoque1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -123,11 +124,9 @@ public class Menu extends javax.swing.JFrame {
                             .addComponent(jButton_estoque, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jButton_pedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addGap(3, 3, 3)))
+                                .addGap(3, 3, 3))
+                            .addComponent(jButton_estoque1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(381, 381, 381))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton_salvar))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addComponent(jLabel_logo_uva)
@@ -136,8 +135,7 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jLabel_subtitulo)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton_sair)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
@@ -154,18 +152,16 @@ public class Menu extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(jDesktopPane_login, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 196, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 198, Short.MAX_VALUE)
                 .addComponent(jLabel_titulo)
                 .addGap(51, 51, 51)
                 .addComponent(jButton_pedidos)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jButton_estoque)
-                .addGap(85, 85, 85)
-                .addComponent(jButton_salvar)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_subtitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton_sair))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jButton_estoque1, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(112, 112, 112)
+                .addComponent(jLabel_subtitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -185,6 +181,10 @@ public class Menu extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton_SairActionPerformed
 
+    private void jButton_estoque1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_estoque1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_estoque1ActionPerformed
+
     public static void main(String args[]) {
        
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -198,9 +198,8 @@ public class Menu extends javax.swing.JFrame {
     private javax.swing.JButton jButton_Entrar;
     private javax.swing.JButton jButton_Sair;
     private javax.swing.JButton jButton_estoque;
+    private javax.swing.JButton jButton_estoque1;
     private javax.swing.JButton jButton_pedidos;
-    private javax.swing.JButton jButton_sair;
-    private javax.swing.JButton jButton_salvar;
     private javax.swing.JDesktopPane jDesktopPane_login;
     private javax.swing.JLabel jLabel_IconeLogin;
     private javax.swing.JLabel jLabel_logo_uva;

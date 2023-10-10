@@ -27,7 +27,6 @@ public class Pedidos extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton_sairTelaPedidos = new javax.swing.JButton();
         jLabel_TituloTelaPedido = new javax.swing.JLabel();
         jLabel_NPedido = new javax.swing.JLabel();
         jLabel_TipoSalgado = new javax.swing.JLabel();
@@ -43,9 +42,6 @@ public class Pedidos extends javax.swing.JDialog {
         jButton_Editar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jButton_sairTelaPedidos.setBackground(new java.awt.Color(255, 0, 0));
-        jButton_sairTelaPedidos.setText("X");
 
         jLabel_TituloTelaPedido.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel_TituloTelaPedido.setText("PEDIDOS");
@@ -105,9 +101,7 @@ public class Pedidos extends javax.swing.JDialog {
             .addGroup(layout.createSequentialGroup()
                 .addGap(306, 306, 306)
                 .addComponent(jLabel_TituloTelaPedido)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton_sairTelaPedidos)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(0, 28, Short.MAX_VALUE)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 679, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -144,9 +138,7 @@ public class Pedidos extends javax.swing.JDialog {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_TituloTelaPedido)
-                    .addComponent(jButton_sairTelaPedidos))
+                .addComponent(jLabel_TituloTelaPedido)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(48, 48, 48)
@@ -231,7 +223,6 @@ public class Pedidos extends javax.swing.JDialog {
     private javax.swing.JButton jButton_Anotar;
     private javax.swing.JButton jButton_Editar;
     private javax.swing.JButton jButton_Listar;
-    private javax.swing.JButton jButton_sairTelaPedidos;
     private javax.swing.JCheckBox jCheckBox_EhPromocao;
     private javax.swing.JComboBox<String> jComboBox_TipoSalgado;
     private javax.swing.JComboBox<String> jComboBox_TipoSuco;

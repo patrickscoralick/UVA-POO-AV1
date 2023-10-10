@@ -27,25 +27,19 @@ public class Estoque extends javax.swing.JDialog {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton_sairTelaEstoque = new javax.swing.JButton();
         jLabel_TituloTelaPedido = new javax.swing.JLabel();
-        jSpinner_Salgado = new javax.swing.JSpinner();
         jSpinner_Hamburguer = new javax.swing.JSpinner();
-        jSpinner_Uva = new javax.swing.JSpinner();
-        jSpinner_Laranja = new javax.swing.JSpinner();
         jButton_RegistroEstoque = new javax.swing.JButton();
         jButton_ListarEstoque = new javax.swing.JButton();
         jLabel_EstoqueSalgado = new javax.swing.JLabel();
-        jLabel_EstoqueHamburguer = new javax.swing.JLabel();
-        jLabel_EstoqueUva = new javax.swing.JLabel();
-        jLabel_EstoqueLaranja = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_EstoqueProdutos = new javax.swing.JTable();
+        jButton_ListarEstoque2 = new javax.swing.JButton();
+        jButton_ListarEstoque1 = new javax.swing.JButton();
+        jLabel_EstoqueSalgado1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-
-        jButton_sairTelaEstoque.setBackground(new java.awt.Color(255, 0, 0));
-        jButton_sairTelaEstoque.setText("X");
 
         jLabel_TituloTelaPedido.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel_TituloTelaPedido.setText("ESTOQUE DE PRODUTOS");
@@ -56,15 +50,14 @@ public class Estoque extends javax.swing.JDialog {
 
         jButton_ListarEstoque.setBackground(new java.awt.Color(0, 0, 0));
         jButton_ListarEstoque.setForeground(new java.awt.Color(255, 255, 255));
-        jButton_ListarEstoque.setText("LISTAR");
+        jButton_ListarEstoque.setText("PESQUISAR");
+        jButton_ListarEstoque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ListarEstoqueActionPerformed(evt);
+            }
+        });
 
-        jLabel_EstoqueSalgado.setText("Salgado Congelado:");
-
-        jLabel_EstoqueHamburguer.setText("Carne Hamburguer:");
-
-        jLabel_EstoqueUva.setText("Cachos de Uva:");
-
-        jLabel_EstoqueLaranja.setText("Unidade de Laranja:");
+        jLabel_EstoqueSalgado.setText("Nome do Produto:");
 
         jTable_EstoqueProdutos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -74,11 +67,11 @@ public class Estoque extends javax.swing.JDialog {
                 {null, null}
             },
             new String [] {
-                "Quantidade", "Produto"
+                "Produto", "Quantidade"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Integer.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -87,85 +80,84 @@ public class Estoque extends javax.swing.JDialog {
         });
         jScrollPane1.setViewportView(jTable_EstoqueProdutos);
 
+        jButton_ListarEstoque2.setBackground(new java.awt.Color(0, 0, 0));
+        jButton_ListarEstoque2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_ListarEstoque2.setText("EDITAR");
+        jButton_ListarEstoque2.setActionCommand("EDITAR");
+        jButton_ListarEstoque2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ListarEstoque2ActionPerformed(evt);
+            }
+        });
+
+        jButton_ListarEstoque1.setBackground(new java.awt.Color(0, 0, 0));
+        jButton_ListarEstoque1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton_ListarEstoque1.setText("DELETAR");
+        jButton_ListarEstoque1.setToolTipText("");
+        jButton_ListarEstoque1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ListarEstoque1ActionPerformed(evt);
+            }
+        });
+
+        jLabel_EstoqueSalgado1.setText("Quantidade:");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton_sairTelaEstoque))
+                .addGap(39, 39, 39)
+                .addComponent(jLabel_EstoqueSalgado)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel_EstoqueSalgado1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSpinner_Hamburguer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(87, 87, 87))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel_TituloTelaPedido)
+                .addGap(196, 196, 196))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(55, 55, 55)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(39, 39, 39)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel_EstoqueSalgado)
-                                            .addComponent(jLabel_EstoqueHamburguer))
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(jSpinner_Salgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jSpinner_Hamburguer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addGroup(layout.createSequentialGroup()
-                                                .addComponent(jLabel_EstoqueLaranja, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jSpinner_Laranja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                                                .addComponent(jLabel_EstoqueUva)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                                .addComponent(jSpinner_Uva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                                    .addGroup(layout.createSequentialGroup()
-                                        .addComponent(jLabel_TituloTelaPedido)
-                                        .addGap(76, 76, 76))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                                        .addGap(1, 1, 1)
-                                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 384, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(140, 140, 140)
-                                .addComponent(jButton_RegistroEstoque)
-                                .addGap(18, 18, 18)
-                                .addComponent(jButton_ListarEstoque)))
-                        .addGap(0, 26, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(jButton_RegistroEstoque)
+                        .addGap(64, 64, 64)
+                        .addComponent(jButton_ListarEstoque)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton_ListarEstoque2)
+                        .addGap(60, 60, 60)
+                        .addComponent(jButton_ListarEstoque1))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 519, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(62, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jButton_sairTelaEstoque))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
-                        .addComponent(jLabel_TituloTelaPedido)))
-                .addGap(38, 38, 38)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel_EstoqueUva)
-                            .addComponent(jSpinner_Uva, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(40, 40, 40)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jLabel_EstoqueLaranja)
-                                .addComponent(jSpinner_Laranja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel_EstoqueSalgado)
-                            .addComponent(jSpinner_Salgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel_EstoqueHamburguer)
-                            .addComponent(jSpinner_Hamburguer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel_TituloTelaPedido)
+                .addGap(41, 41, 41)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel_EstoqueSalgado)
+                    .addComponent(jSpinner_Hamburguer, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel_EstoqueSalgado1)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(55, 55, 55)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton_RegistroEstoque)
-                    .addComponent(jButton_ListarEstoque))
+                    .addComponent(jButton_ListarEstoque)
+                    .addComponent(jButton_ListarEstoque2)
+                    .addComponent(jButton_ListarEstoque1))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(13, Short.MAX_VALUE))
@@ -173,6 +165,22 @@ public class Estoque extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton_ListarEstoque2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ListarEstoque2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_ListarEstoque2ActionPerformed
+
+    private void jButton_ListarEstoque1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ListarEstoque1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_ListarEstoque1ActionPerformed
+
+    private void jButton_ListarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ListarEstoqueActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton_ListarEstoqueActionPerformed
+
+    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -218,18 +226,15 @@ public class Estoque extends javax.swing.JDialog {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton_ListarEstoque;
+    private javax.swing.JButton jButton_ListarEstoque1;
+    private javax.swing.JButton jButton_ListarEstoque2;
     private javax.swing.JButton jButton_RegistroEstoque;
-    private javax.swing.JButton jButton_sairTelaEstoque;
-    private javax.swing.JLabel jLabel_EstoqueHamburguer;
-    private javax.swing.JLabel jLabel_EstoqueLaranja;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel_EstoqueSalgado;
-    private javax.swing.JLabel jLabel_EstoqueUva;
+    private javax.swing.JLabel jLabel_EstoqueSalgado1;
     private javax.swing.JLabel jLabel_TituloTelaPedido;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSpinner jSpinner_Hamburguer;
-    private javax.swing.JSpinner jSpinner_Laranja;
-    private javax.swing.JSpinner jSpinner_Salgado;
-    private javax.swing.JSpinner jSpinner_Uva;
     private javax.swing.JTable jTable_EstoqueProdutos;
     // End of variables declaration//GEN-END:variables
 }
