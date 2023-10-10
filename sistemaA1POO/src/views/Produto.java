@@ -3,19 +3,33 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JDialog.java to edit this template
  */
 package views;
+import Controllers.ProductController;
+import Controllers.StockController;
+import Enums.Type;
+import Models.Product;
+import Models.Stock;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
  * @author patri
  */
 public class Produto extends javax.swing.JDialog {
-
+    private ProductController productController;
     /**
      * Creates new form Pedidos
      */
     public Produto(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        productController = new ProductController();
     }
 
     /**
@@ -72,25 +86,35 @@ public class Produto extends javax.swing.JDialog {
         jButton_Anotar.setBackground(new java.awt.Color(0, 0, 0));
         jButton_Anotar.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Anotar.setText("REGISTRAR");
+        jButton_Anotar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_AnotarActionPerformed(evt);
+            }
+        });
 
         jButton_Listar.setBackground(new java.awt.Color(0, 0, 0));
         jButton_Listar.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Listar.setText("LISTAR");
+        jButton_Listar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ListarActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
-            },
-            new String [] {
-                "Id", "Tipo", "Descrição", "Produto", "Preço (R$)"
-            }
+                new Object [][] {
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null},
+                        {null, null, null, null, null}
+                },
+                new String [] {
+                        "Id", "Tipo", "Descrição", "Produto", "Preço (R$)"
+                }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class
+                    java.lang.Integer.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Float.class
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -102,6 +126,11 @@ public class Produto extends javax.swing.JDialog {
         jButton_Editar.setBackground(new java.awt.Color(0, 0, 0));
         jButton_Editar.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Editar.setText("EDITAR");
+        jButton_Editar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_EditarActionPerformed(evt);
+            }
+        });
 
         jButton_Editar1.setBackground(new java.awt.Color(0, 0, 0));
         jButton_Editar1.setForeground(new java.awt.Color(255, 255, 255));
@@ -137,80 +166,80 @@ public class Produto extends javax.swing.JDialog {
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jLabel_TituloTelaPedido)
-                        .addGap(319, 319, 319))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton_Anotar)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jButton_Listar)
-                                .addGap(139, 139, 139)
-                                .addComponent(jButton_Editar)
-                                .addGap(127, 127, 127)
-                                .addComponent(jButton_Editar1)))
-                        .addGap(78, 78, 78))))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(125, 125, 125)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel_TipoSalgado)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_NPedido2)
-                        .addGap(54, 54, 54))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jLabel_NPedido1)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_NPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(62, 62, 62)
-                        .addComponent(jLabel_NPedido)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox_TipoSalgado, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(31, 31, 31)))
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel_TipoSalgado1)
-                    .addComponent(jLabel_TipoSuco))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTextField_NPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField_NPedido3, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(78, 78, 78))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addComponent(jLabel_TituloTelaPedido)
+                                                .addGap(319, 319, 319))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 711, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addGroup(layout.createSequentialGroup()
+                                                                .addComponent(jButton_Anotar)
+                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(jButton_Listar)
+                                                                .addGap(139, 139, 139)
+                                                                .addComponent(jButton_Editar)
+                                                                .addGap(127, 127, 127)
+                                                                .addComponent(jButton_Editar1)))
+                                                .addGap(78, 78, 78))))
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(125, 125, 125)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jLabel_TipoSalgado)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextField_NPedido2)
+                                                .addGap(54, 54, 54))
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addComponent(jLabel_NPedido1)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextField_NPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(62, 62, 62)
+                                                .addComponent(jLabel_NPedido)
+                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jComboBox_TipoSalgado, javax.swing.GroupLayout.PREFERRED_SIZE, 205, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(31, 31, 31)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel_TipoSalgado1)
+                                        .addComponent(jLabel_TipoSuco))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextField_NPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField_NPedido3, javax.swing.GroupLayout.PREFERRED_SIZE, 253, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(78, 78, 78))
         );
         layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(8, 8, 8)
-                .addComponent(jLabel_TituloTelaPedido)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_NPedido1)
-                    .addComponent(jTextField_NPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_NPedido)
-                    .addComponent(jLabel_TipoSuco)
-                    .addComponent(jTextField_NPedido3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox_TipoSalgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel_TipoSalgado)
-                    .addComponent(jTextField_NPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel_TipoSalgado1)
-                    .addComponent(jTextField_NPedido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton_Anotar)
-                    .addComponent(jButton_Listar)
-                    .addComponent(jButton_Editar)
-                    .addComponent(jButton_Editar1))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(layout.createSequentialGroup()
+                                .addGap(8, 8, 8)
+                                .addComponent(jLabel_TituloTelaPedido)
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel_NPedido1)
+                                        .addComponent(jTextField_NPedido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel_NPedido)
+                                        .addComponent(jLabel_TipoSuco)
+                                        .addComponent(jTextField_NPedido3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jComboBox_TipoSalgado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jLabel_TipoSalgado)
+                                        .addComponent(jTextField_NPedido1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel_TipoSalgado1)
+                                        .addComponent(jTextField_NPedido2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(30, 30, 30)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jButton_Anotar)
+                                        .addComponent(jButton_Listar)
+                                        .addComponent(jButton_Editar)
+                                        .addComponent(jButton_Editar1))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         pack();
@@ -225,7 +254,17 @@ public class Produto extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField_NPedidoActionPerformed
 
     private void jButton_Editar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Editar1ActionPerformed
-        // TODO add your handling code here:
+        // Excluir
+        try {
+            String name_product = jTextField_NPedido1.getText();
+            ProductController productController = new ProductController();
+            Product searchProduct = new Product(name_product, "", null, 0);
+            Product foundProduct = productController.getByProduct(searchProduct);
+            productController.delete(foundProduct);
+            jTextField_NPedido1.setText("");
+        } catch (Exception ex) {
+            Logger.getLogger(Estoque.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton_Editar1ActionPerformed
 
     private void jTextField_NPedido1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_NPedido1ActionPerformed
@@ -240,6 +279,77 @@ public class Produto extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField_NPedido3ActionPerformed
 
+    private void jButton_EditarActionPerformed(java.awt.event.ActionEvent evt){
+//      Editar pedido
+
+    }
+    private void jButton_AnotarActionPerformed(java.awt.event.ActionEvent evt){
+//        Registrar pedido
+        try {
+            if (jTextField_NPedido.getText().isEmpty() || jTextField_NPedido1.getText().isEmpty() ||
+                    jTextField_NPedido2.getText().isEmpty() || jTextField_NPedido3.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha todos os campos antes de registrar o produto.");
+                return;
+            }
+            int id = Integer.parseInt(jTextField_NPedido.getText());
+//        Type tipo = Type.DRINK;
+            String descricao = jTextField_NPedido3.getText();
+            String nomeProduto = jTextField_NPedido2.getText();
+            float preco = Float.parseFloat(jTextField_NPedido1.getText());
+
+            ProductController productController = new ProductController();
+
+            productController.add(new Product(id, nomeProduto, descricao, Enums.Type.DRINK, preco));
+
+            jTextField_NPedido.setText("");
+            jTextField_NPedido1.setText("");
+            jTextField_NPedido2.setText("");
+            jTextField_NPedido3.setText("");
+
+            JOptionPane.showMessageDialog(this, "Produto registrado com sucesso.");
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao registrar o produto. Verifique os valores inseridos.");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao registrar o produto.");
+        }
+    }
+
+    private void jButton_ListarActionPerformed(java.awt.event.ActionEvent evt){
+//        Listar pedido
+        ProductController productController = new ProductController();
+
+
+        ArrayList<Product> products = productController.get();
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Id");
+        modelo.addColumn("Tipo");
+        modelo.addColumn("Descricao");
+        modelo.addColumn("Produto");
+        modelo.addColumn("Preco");
+
+        for (Product product : products) {
+            modelo.addRow(new Object[]{product.id, product.type, product.description, product.name, product.price});
+        }
+
+        jTable2.setModel(modelo);
+        jTable2.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int rowIndex = jTable2.getSelectedRow();
+                if(rowIndex != -1) {
+                    ProductController productController = new ProductController();
+                    ArrayList<Product> products = productController.get();
+                    Product product = products.get(rowIndex);
+
+//                    jSpinner_Hamburguer.setValue(product.id);
+//                    jComboBox1_Nome_Porduto.setSelectedItem(product.type);
+
+                }
+            }
+
+        });
+    }
     /**
      * @param args the command line arguments
      */
@@ -247,7 +357,7 @@ public class Produto extends javax.swing.JDialog {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
+         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
