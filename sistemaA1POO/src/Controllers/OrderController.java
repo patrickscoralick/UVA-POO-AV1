@@ -19,7 +19,7 @@ import java.util.ArrayList;
  */
 public class OrderController {
     
-    public Order add(Order order) throws Exception   {
+    public Order add(Order order) throws Exception {
         OrderDao orderDao = new OrderDao();
         ProductController productController = new ProductController();
         StockController stockController = new StockController();
