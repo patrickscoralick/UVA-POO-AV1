@@ -6,6 +6,7 @@ package Controllers;
 
 import Dao.ProductDao;
 import Exceptions.InvalidIdException;
+import Exceptions.InvalidQuantityExeception;
 import Exceptions.ModelNotCreatedExeception;
 import Models.Product;
 import java.util.ArrayList;
@@ -40,7 +41,7 @@ public class ProductController {
         }
     }
     
-    public Product update(Product product) throws Exception {
+    public Product update(Product product) throws InvalidQuantityExeception, InvalidIdException, ModelNotCreatedExeception {
         if(product.id == -1) {
             throw new InvalidIdException("invalid id");
         }
@@ -73,6 +74,19 @@ public class ProductController {
         int productIndex = products.indexOf(product);
         
         return productIndex > -1 ? products.get(productIndex) : null;
+    }
+
+    public Product getByProductName(String productName) {
+        ProductDao productDao = new ProductDao();
+        ArrayList<Product> products = productDao.get();
+
+        for (Product product : products) {
+            if (product.name.equals(productName)) {
+                return product;
+            }
+        }
+
+        return null;
     }
 
     public double ValorProduto(String nomeProduto, int quantidade) throws Exception {

@@ -4,8 +4,11 @@
  */
 package views;
 import Controllers.ProductController;
-import Controllers.StockController;
+
 import Enums.Type;
+import Exceptions.InvalidIdException;
+import Exceptions.InvalidQuantityExeception;
+import Exceptions.ModelNotCreatedExeception;
 import Models.Product;
 import Models.Stock;
 
@@ -256,12 +259,20 @@ public class Produto extends javax.swing.JDialog {
     private void jButton_Editar1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_Editar1ActionPerformed
         // Excluir
         try {
-            String name_product = jTextField_NPedido1.getText();
+            int id = Integer.parseInt(jTextField_NPedido.getText());
+//            Type tipo = jComboBox_TipoSalgado.getSelectedItem()
+            String name_product = jTextField_NPedido2.getText();
+            String descricao = jTextField_NPedido3.getText();
+            float preco = Float.parseFloat(jTextField_NPedido1.getText());
             ProductController productController = new ProductController();
-            Product searchProduct = new Product(name_product, "", null, 0);
+            Product searchProduct = new Product(id ,name_product, descricao, null, preco);
             Product foundProduct = productController.getByProduct(searchProduct);
+            System.out.println(foundProduct);
             productController.delete(foundProduct);
+            jTextField_NPedido2.setText("");
             jTextField_NPedido1.setText("");
+            jTextField_NPedido3.setText("");
+            jTextField_NPedido.setText("");
         } catch (Exception ex) {
             Logger.getLogger(Estoque.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -280,8 +291,31 @@ public class Produto extends javax.swing.JDialog {
     }//GEN-LAST:event_jTextField_NPedido3ActionPerformed
 
     private void jButton_EditarActionPerformed(java.awt.event.ActionEvent evt){
+        try{
 //      Editar pedido
-
+            int id = Integer.parseInt(jTextField_NPedido.getText());
+            // Type tipo = jComboBox_TipoSalgado
+            String descricao = jTextField_NPedido3.getText();
+            String productName = jTextField_NPedido2.getText();
+            float preco = Float.parseFloat(jTextField_NPedido1.getText());
+            ProductController productController = new ProductController();
+            Product searchProduct = new Product(id, productName, descricao, null, preco);
+            Product foundProduct = productController.getByProduct(searchProduct);
+            foundProduct.price = preco;
+            foundProduct.description = descricao;
+//            foundProduct.type = tipo;
+            productController.update(foundProduct);
+            jTextField_NPedido.setText("");
+            jTextField_NPedido1.setText("");
+            jTextField_NPedido2.setText("");
+            jTextField_NPedido3.setText("");
+        } catch (InvalidQuantityExeception ex) {
+            Logger.getLogger(Estoque.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidIdException ex) {
+            Logger.getLogger(Estoque.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ModelNotCreatedExeception ex) {
+            Logger.getLogger(Estoque.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     private void jButton_AnotarActionPerformed(java.awt.event.ActionEvent evt){
 //        Registrar pedido
@@ -292,7 +326,7 @@ public class Produto extends javax.swing.JDialog {
                 return;
             }
             int id = Integer.parseInt(jTextField_NPedido.getText());
-//        Type tipo = Type.DRINK;
+//        Type tipo = jComboBox_TipoSalgado
             String descricao = jTextField_NPedido3.getText();
             String nomeProduto = jTextField_NPedido2.getText();
             float preco = Float.parseFloat(jTextField_NPedido1.getText());
@@ -342,8 +376,11 @@ public class Produto extends javax.swing.JDialog {
                     ArrayList<Product> products = productController.get();
                     Product product = products.get(rowIndex);
 
-//                    jSpinner_Hamburguer.setValue(product.id);
-//                    jComboBox1_Nome_Porduto.setSelectedItem(product.type);
+                    jTextField_NPedido.setText(String.valueOf(product.id));
+                    jTextField_NPedido3.setText(product.description);
+                    jTextField_NPedido2.setText(product.name);
+                    jTextField_NPedido1.setText(String.valueOf(product.price));
+//                    jComboBox_TipoSalgado.setSelectedItem(product.type);
 
                 }
             }
