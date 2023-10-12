@@ -73,7 +73,7 @@ public class Produto extends javax.swing.JDialog {
 
         jLabel_TipoSuco.setText("Descrição:");
 
-        jComboBox_TipoSalgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Salgado Médio", "Salgadão" }));
+        jComboBox_TipoSalgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Bebida", "Salgado" }));
         jComboBox_TipoSalgado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_TipoSalgadoActionPerformed(evt);
