@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -326,16 +327,52 @@ public class Pedidos extends javax.swing.JDialog {
 
     private void jButton_EditarActionPerformed(java.awt.event.ActionEvent evt) {
         try {
-            int numeroPedidoParaDeletar = Integer.parseInt(jTextField_NPedido.getText());
-            OrderController ordecontroller = new OrderController();
-            Order order = ordecontroller.getById(numeroPedidoParaDeletar);
-            ordecontroller.update(order);
+            int numeroPedidoParaEditar = Integer.parseInt(jTextField_NPedido.getText());
+            OrderController orderController = new OrderController();
+            ArrayList<Order> orders = orderController.get();
+
+            // Crie um novo objeto Order com as informações atualizadas
+            Product salgado = (Product) jComboBox_TipoSalgado.getSelectedItem();
+            Product bebida = (Product) jComboBox_TipoSuco.getSelectedItem();
+            boolean promocao = jCheckBox_EhPromocao.isSelected();
+            String str_salgado = jComboBox_TipoSalgado.getSelectedItem().toString();
+            String str_bebida = jComboBox_TipoSuco.getSelectedItem().toString();
+            ProductController productController = new ProductController();
+            Double valorComida = productController.ValorProduto(str_salgado, 1);
+            Double valorBebida = productController.ValorProduto(str_bebida,1);
+            float valorComidaFloat = valorComida.floatValue();
+            float valorBebidaFloat = valorBebida.floatValue();
+            float novoTotal = orderController.calcularTotalDosItens(
+                    valorComidaFloat, valorBebidaFloat, promocao
+            );
+            ArrayList<Product> produtosAtualizados = new ArrayList<>();
+            produtosAtualizados.add((Product) jComboBox_TipoSalgado.getSelectedItem());
+            produtosAtualizados.add((Product) jComboBox_TipoSuco.getSelectedItem());
+            Order pedidoAtualizado = new Order(
+                    numeroPedidoParaEditar, produtosAtualizados, promocao, novoTotal
+            );
+
+            int orderIndex = -1;
+            for (int i = 0; i < orders.size(); i++) {
+                if (orders.get(i).id == numeroPedidoParaEditar) {
+                    orderIndex = i;
+                    break;
+                }
+            }
+
+            if (orderIndex != -1) {
+                orders.set(orderIndex, pedidoAtualizado);
+                orderController.update(pedidoAtualizado);
+                JOptionPane.showMessageDialog(this, "Pedido editado com sucesso.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Pedido não encontrado.");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Número de pedido inválido.");
         } catch (Exception ex) {
-            Logger.getLogger(Estoque.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(this, "Erro ao editar o pedido: " + ex.getMessage());
         }
     }
-
-
 
     private void jComboBox_TipoSalgadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_TipoSalgadoActionPerformed
         // TODO add your handling code here:
