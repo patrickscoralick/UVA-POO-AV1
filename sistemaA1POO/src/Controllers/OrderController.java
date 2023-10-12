@@ -149,15 +149,15 @@ public class OrderController {
         }
     }
     }
-    public float calcularTotalDosItens(float valor_item1, float valor_item2){
+    public float calcularTotalDosItens(float valor_item1, float valor_item2, boolean promotion) {
+        float total = valor_item1 + valor_item2; // Inicialize a variável total com a soma dos valores dos itens
 
-        float total = valor_item1 + valor_item2;
+        if (promotion) {
+            total -= 1; // Subtrai 1 unidade do total se a promoção for verdadeira
+        }
 
         return total;
-
-
     }
-
     public ArrayList<Order> get() {
         OrderDao orderDao = new OrderDao();
         return orderDao.get();

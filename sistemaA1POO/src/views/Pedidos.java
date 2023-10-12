@@ -245,7 +245,7 @@ public class Pedidos extends javax.swing.JDialog {
             Double valorBebida = productController.ValorProduto(str_bebida,2);
             float valorComidaFloat = valorComida.floatValue();
             float valorBebidaFloat = valorBebida.floatValue();
-            Float preco = orderController.calcularTotalDosItens(valorComidaFloat, valorBebidaFloat);
+            Float preco = orderController.calcularTotalDosItens(valorComidaFloat, valorBebidaFloat, promocao);
 
             ArrayList<Product> lista_produto = new ArrayList<Product>();
 
