@@ -177,10 +177,14 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton_pedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_pedidosActionPerformed
         // TODO add your handling code here:
+        Pedidos pedidoDialog = new Pedidos(this, true);
+        pedidoDialog.setVisible(true);
     }//GEN-LAST:event_jButton_pedidosActionPerformed
 
     private void jButton_estoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_estoqueActionPerformed
         // TODO add your handling code here:
+        Estoque estoqueDialog = new Estoque(this, true);
+        estoqueDialog.setVisible(true);
     }//GEN-LAST:event_jButton_estoqueActionPerformed
 
     private void jButton_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SairActionPerformed
@@ -189,6 +193,8 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton_estoque1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_estoque1ActionPerformed
         // TODO add your handling code here:
+        Produto produtoDialog = new Produto(this, true);
+        produtoDialog.setVisible(true);
     }//GEN-LAST:event_jButton_estoque1ActionPerformed
     private void jButton_EntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Coloque a lógica de verificação de credenciais aqui
