@@ -218,6 +218,7 @@ public class Estoque extends javax.swing.JDialog {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton_ListarEstoque2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ListarEstoque2ActionPerformed
+//        Editar
         try {
             // TODO add your handling code here:
             int quantity = (int) jSpinner_Hamburguer.getValue();
@@ -238,6 +239,7 @@ public class Estoque extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton_ListarEstoque2ActionPerformed
 
     private void jButton_ListarEstoque1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ListarEstoque1ActionPerformed
+//        Excluir
         try {
             Product product = (Product) jComboBox1_Nome_Porduto.getSelectedItem();
             StockController stockController = new StockController();
@@ -250,6 +252,7 @@ public class Estoque extends javax.swing.JDialog {
     }//GEN-LAST:event_jButton_ListarEstoque1ActionPerformed
 
     private void jButton_ListarEstoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_ListarEstoqueActionPerformed
+//        Listar
  
         StockController stockController = new StockController();
         
