@@ -31,6 +31,9 @@ public class Pedidos extends javax.swing.JDialog {
     public Pedidos(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+
+        fillProductComboBox(jComboBox_TipoSalgado, "Comida");
+        fillProductComboBox(jComboBox_TipoSuco, "Bebida");
     }
 
     /**
@@ -68,14 +71,14 @@ public class Pedidos extends javax.swing.JDialog {
 
         jLabel_TipoSuco.setText("Tipo Suco:");
 
-        jComboBox_TipoSalgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Salgado Médio", "Salgadão" }));
+//        jComboBox_TipoSalgado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
         jComboBox_TipoSalgado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_TipoSalgadoActionPerformed(evt);
             }
         });
 
-        jComboBox_TipoSuco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-", "Suco Laranja", "Suco Uva" }));
+//        jComboBox_TipoSuco.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-" }));
         jComboBox_TipoSuco.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_TipoSucoActionPerformed(evt);
@@ -361,6 +364,26 @@ public class Pedidos extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox_TipoSucoActionPerformed
 
+    private void fillProductComboBox(JComboBox<Product> comboBox, String type) {
+        ProductController productController = new ProductController();
+        ArrayList<Product> products = productController.get();
+
+        // Limpar a ComboBox antes de adicionar os produtos
+        comboBox.removeAllItems();
+
+        for (Product product : products) {
+            if (product.type.equals(type)) {
+                comboBox.addItem(product);
+            }
+        }
+    }
+
+    /**
+     * Creates new form Pedidos
+     */
+
+
+
     /**
      * @param args the command line arguments
      */
@@ -409,8 +432,8 @@ public class Pedidos extends javax.swing.JDialog {
     private javax.swing.JButton jButton_Editar1;
     private javax.swing.JButton jButton_Listar;
     private javax.swing.JCheckBox jCheckBox_EhPromocao;
-    private javax.swing.JComboBox<String> jComboBox_TipoSalgado;
-    private javax.swing.JComboBox<String> jComboBox_TipoSuco;
+    private javax.swing.JComboBox<Product> jComboBox_TipoSalgado;
+    private javax.swing.JComboBox<Product> jComboBox_TipoSuco;
     private javax.swing.JLabel jLabel_NPedido;
     private javax.swing.JLabel jLabel_TipoSalgado;
     private javax.swing.JLabel jLabel_TipoSuco;
