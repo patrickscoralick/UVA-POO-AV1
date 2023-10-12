@@ -4,6 +4,21 @@
  */
 package views;
 
+import Controllers.ProductController;
+import Controllers.OrderController;
+import Controllers.StockController;
+import Models.Order;
+import Models.Product;
+import Models.Stock;
+
+import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
+import javax.swing.table.DefaultTableModel;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import java.util.ArrayList;
+
 /**
  *
  * @author patri
@@ -72,10 +87,20 @@ public class Pedidos extends javax.swing.JDialog {
         jButton_Anotar.setBackground(new java.awt.Color(0, 0, 0));
         jButton_Anotar.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Anotar.setText("REGISTRAR");
+        jButton_Anotar.addActionListener(new java.awt.event.ActionListener(){
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_AnotarActionPerformed(evt);
+            }
+        });
 
         jButton_Listar.setBackground(new java.awt.Color(0, 0, 0));
         jButton_Listar.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Listar.setText("LISTAR");
+        jButton_Listar.addActionListener(new java.awt.event.ActionListener(){
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_ListarActionPerformed(evt);
+            }
+        });
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -94,10 +119,20 @@ public class Pedidos extends javax.swing.JDialog {
         jButton_Editar.setBackground(new java.awt.Color(0, 0, 0));
         jButton_Editar.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Editar.setText("EDITAR");
+        jButton_Editar.addActionListener(new java.awt.event.ActionListener(){
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_EditarActionPerformed(evt);
+            }
+        });
 
         jButton_Editar1.setBackground(new java.awt.Color(0, 0, 0));
         jButton_Editar1.setForeground(new java.awt.Color(255, 255, 255));
         jButton_Editar1.setText("EXCLUIR");
+        jButton_Editar1.addActionListener(new java.awt.event.ActionListener(){
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton_Editar1ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -177,6 +212,146 @@ public class Pedidos extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+//    private void jButton_AnotarActionPerformed(java.awt.event.ActionEvent evt) {
+//        int NPedido = Integer.parseInt(jTextField_NPedido.getText());
+//        String tipoSalgado = jComboBox_TipoSalgado.getSelectedItem().toString();
+//        String tipoRefresco = jComboBox_TipoSuco.getSelectedItem().toString();
+//        float total = ''
+//        jCheckBox_EhPromocao.addItemListener(new ItemListener() {
+//            @Override
+//            public void itemStateChanged(ItemEvent e) {
+//                if(e.getStateChange() == ItemEvent.SELECTED) {
+//                    //subtrair da variável valor total -R$1,00
+//                }
+//            }
+//        });
+//    }
+
+    private void jButton_AnotarActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            if (jTextField_NPedido.getText().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Preencha o numero do pedido antes de registrar.");
+                return;
+            }
+            int pedido = Integer.parseInt(jTextField_NPedido.getText());
+            Product salgado = (Product)jComboBox_TipoSalgado.getSelectedItem();
+            Product bebida = (Product)jComboBox_TipoSuco.getSelectedItem();
+            boolean promocao = jCheckBox_EhPromocao.isSelected();
+            ProductController productController = new ProductController();
+            OrderController orderController = new OrderController();
+            String str_salgado = jComboBox_TipoSalgado.getSelectedItem().toString();
+            String str_bebida = jComboBox_TipoSuco.getSelectedItem().toString();
+            Double valorComida = productController.ValorProduto(str_salgado, 1);
+            Double valorBebida = productController.ValorProduto(str_bebida,2);
+            float valorComidaFloat = valorComida.floatValue();
+            float valorBebidaFloat = valorBebida.floatValue();
+            Float preco = orderController.calcularTotalDosItens(valorComidaFloat, valorBebidaFloat);
+
+            ArrayList<Product> lista_produto = new ArrayList<Product>();
+
+            Product produtoSalgado = productController.getByProduct(salgado);
+            Product produtoBebida = productController.getByProduct(bebida);
+
+
+            if (produtoSalgado != null) {
+                lista_produto.add(produtoSalgado);
+            } else {
+                JOptionPane.showMessageDialog(this, "Salgado não cadastrado.");
+                return;
+            }
+
+            if (produtoBebida != null) {
+                lista_produto.add(produtoBebida);
+            } else {
+                JOptionPane.showMessageDialog(this, "Bebida não cadastrada.");
+                return;
+            }
+
+            orderController.add(new Order(pedido, lista_produto, promocao, preco));
+
+            jTextField_NPedido.setText("");
+
+
+            JOptionPane.showMessageDialog(this, "Produto registrado com sucesso.");
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao registrar o produto. Verifique os valores inseridos.");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao registrar o produto.");
+        }
+    }
+    private void jButton_ListarActionPerformed(java.awt.event.ActionEvent evt){
+        OrderController orderController = new OrderController();
+
+        ArrayList<Order> orders = orderController.get();
+
+        DefaultTableModel modelo = new DefaultTableModel();
+        modelo.addColumn("Nº Pedido");
+        modelo.addColumn("Salgado");
+        modelo.addColumn("Bebida");
+        modelo.addColumn("Promoção");
+        modelo.addColumn("Total (R$)");
+
+
+        for (Order order : orders) {
+            modelo.addRow(new Object[]{order.id, order.products, order.isPromotion, order.total});
+        }
+
+        jTable2.setModel(modelo);
+        jTable2.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
+            @Override
+            public void valueChanged(ListSelectionEvent e) {
+                int rowIndex = jTable2.getSelectedRow();
+                if(rowIndex != -1) {
+                    OrderController orderController = new OrderController();
+                    ArrayList<Order> orders = orderController.get();
+                    Order order = orders.get(rowIndex);
+
+                    jTextField_NPedido.setText(String.valueOf(order.id));
+                    jComboBox_TipoSalgado.setSelectedItem(order.products);
+                    jComboBox_TipoSuco.setSelectedItem(order.products);
+                    jCheckBox_EhPromocao.setSelected(order.isPromotion);
+
+                }
+            }
+
+        });
+
+    }
+
+    private void jButton_Editar1ActionPerformed(java.awt.event.ActionEvent evt){//GEN-FIRST:event_jButton_EditarActionPerformed
+        //DELETAR
+        int numeroPedidoParaDeletar = Integer.parseInt(jTextField_NPedido.getText());
+        OrderController orderController = new OrderController();
+        orderController.deleteByNumeroPedido(numeroPedidoParaDeletar);
+
+        JOptionPane.showMessageDialog(this, "Pedido deletado com sucesso.");
+
+    }//GEN-LAST:event_jButton_EditarActionPerformed
+
+    private void jButton_EditarActionPerformed(java.awt.event.ActionEvent evt) {
+        try {
+            int numeroPedido = Integer.parseInt(jTextField_NPedido.getText()); // Obtém o número do pedido a ser editado
+            OrderController orderController = new OrderController();
+
+            // Use a função getById para buscar o pedido com base no número do pedido
+            Order pedidoParaEditar = orderController.getById(numeroPedido);
+
+            if (pedidoParaEditar != null) {
+
+                orderController.update(pedidoParaEditar);
+
+                JOptionPane.showMessageDialog(this, "Pedido editado com sucesso.");
+            } else {
+                JOptionPane.showMessageDialog(this, "Pedido não encontrado.");
+            }
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Número de pedido inválido.");
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao editar o pedido.");
+        }
+    }
+
+
 
     private void jComboBox_TipoSalgadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_TipoSalgadoActionPerformed
         // TODO add your handling code here:
