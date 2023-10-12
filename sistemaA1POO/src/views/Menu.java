@@ -1,10 +1,12 @@
 package views;
 
+import Enums.Level;
+import Controllers.LoginController;
 import java.awt.Image;
 import javax.swing.*;
 
 public class Menu extends javax.swing.JFrame {
-
+    private boolean loginRealizado = false;
     public Menu() {
         initComponents();
 
@@ -175,16 +177,25 @@ public class Menu extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton_pedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_pedidosActionPerformed
-        // TODO add your handling code here:
-        Pedidos pedidoDialog = new Pedidos(this, true);
-        pedidoDialog.setVisible(true);
+    public void setLoginRealizado(boolean loginRealizado) {
+        this.loginRealizado = loginRealizado;
+    }
+    private void jButton_pedidosActionPerformed(java.awt.event.ActionEvent evt) {
+        if (loginRealizado) {
+            Pedidos pedidoDialog = new Pedidos(this, true);
+            pedidoDialog.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Realize o login antes de acessar Pedidos.", "Login Necessário", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButton_pedidosActionPerformed
 
-    private void jButton_estoqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_estoqueActionPerformed
-        // TODO add your handling code here:
-        Estoque estoqueDialog = new Estoque(this, true);
-        estoqueDialog.setVisible(true);
+    private void jButton_estoqueActionPerformed(java.awt.event.ActionEvent evt) {
+        if (loginRealizado) {
+            Estoque estoqueDialog = new Estoque(this, true);
+            estoqueDialog.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Realize o login antes de acessar Estoque.", "Login Necessário", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButton_estoqueActionPerformed
 
     private void jButton_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SairActionPerformed
@@ -193,9 +204,14 @@ public class Menu extends javax.swing.JFrame {
 
     private void jButton_estoque1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_estoque1ActionPerformed
         // TODO add your handling code here:
-        Produto produtoDialog = new Produto(this, true);
-        produtoDialog.setVisible(true);
+        if (loginRealizado) {
+            Produto produtoDialog = new Produto(this, true);
+            produtoDialog.setVisible(true);
+        } else {
+            JOptionPane.showMessageDialog(this, "Realize o login antes de acessar Produto.", "Login Necessário", JOptionPane.INFORMATION_MESSAGE);
+        }
     }//GEN-LAST:event_jButton_estoque1ActionPerformed
+
     private void jButton_EntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Coloque a lógica de verificação de credenciais aqui
         Login login = new Login(Menu.this, true);

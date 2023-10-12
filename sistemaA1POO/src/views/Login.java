@@ -110,7 +110,9 @@ public class Login extends javax.swing.JDialog {
         boolean loginValido = loginController.login(usuario, senha);
 
         if (loginValido){
+            ((Menu) getParent()).setLoginRealizado(true);
             ((Menu) getParent()).ocultarBotaoEntrar();
+            loginController.login_level(usuario, senha);
             dispose();
         }else {
             JOptionPane.showMessageDialog(this, "Usuario ou senha inválidos", "Erro de login", JOptionPane.ERROR_MESSAGE);
