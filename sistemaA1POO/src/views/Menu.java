@@ -198,9 +198,9 @@ public class Menu extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton_estoqueActionPerformed
 
-    private void jButton_SairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_SairActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton_SairActionPerformed
+    private void jButton_SairActionPerformed(java.awt.event.ActionEvent evt) {
+        desfazerLogin();
+    }
 
     private void jButton_estoque1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton_estoque1ActionPerformed
         // TODO add your handling code here:
@@ -213,13 +213,19 @@ public class Menu extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton_estoque1ActionPerformed
 
     private void jButton_EntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // Coloque a lógica de verificação de credenciais aqui
         Login login = new Login(Menu.this, true);
         login.setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     public void ocultarBotaoEntrar() {
         jButton_Entrar.setVisible(false);
+    }
+    public void desfazerLogin() {
+        loginRealizado = false;
+        exibirBotaoEntrar();
+    }
+    public void exibirBotaoEntrar() {
+        jButton_Entrar.setVisible(true);
     }
 
     public static void main(String args[]) {
