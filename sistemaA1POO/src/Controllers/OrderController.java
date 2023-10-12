@@ -118,6 +118,37 @@ public class OrderController {
         return order;
     }
 
+    public Order getById(int orderId) {
+        OrderDao orderDao = new OrderDao();
+        ArrayList<Order> orders = orderDao.get();
+
+        for (Order order : orders) {
+            if (order.id == orderId) {
+                return order;
+            }
+        }
+
+        return null;
+    }
+
+    public void deleteByNumeroPedido(int numeroPedido) {
+        OrderDao orderDao = new OrderDao();
+        ArrayList<Order> orders = orderDao.get();
+
+        Order pedidoParaDeletar = null;
+
+        for (Order order : orders) {
+            if (order.id == numeroPedido) {
+                pedidoParaDeletar = order;
+                break;
+        }
+
+        if (pedidoParaDeletar != null) {
+            orders.remove(pedidoParaDeletar);
+            orderDao.update(orders);
+        }
+    }
+    }
     public float calcularTotalDosItens(float valor_item1, float valor_item2){
 
         float total = valor_item1 + valor_item2;
