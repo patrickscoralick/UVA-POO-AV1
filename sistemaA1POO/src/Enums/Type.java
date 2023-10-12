@@ -9,5 +9,5 @@ package Enums;
  * @author msmeneze
  */
 public enum Type {
-    SALT, DRINK
+    SALT, DRINK, FOOD
 }
