@@ -131,23 +131,28 @@ public class OrderController {
         return null;
     }
 
-    public void deleteByNumeroPedido(int numeroPedido) {
-        OrderDao orderDao = new OrderDao();
-        ArrayList<Order> orders = orderDao.get();
+    public void deleteByNumeroPedido(int numeroPedido) throws Exception {
+        try {
+            OrderDao orderDao = new OrderDao();
+            ArrayList<Order> orders = orderDao.get();
+            Order orderToRemove = null;
 
-        Order pedidoParaDeletar = null;
+            for (Order order : orders) {
+                if (order.id == numeroPedido) {
+                    orderToRemove = order;
+                    break;
+                }
+            }
 
-        for (Order order : orders) {
-            if (order.id == numeroPedido) {
-                pedidoParaDeletar = order;
-                break;
+            if (orderToRemove != null) {
+                orders.remove(orderToRemove);
+                orderDao.update(orders);
+            } else {
+                throw new ModelNotCreatedExeception("Pedido não encontrado.");
+            }
+        } catch (Exception ex) {
+            throw new ModelNotCreatedExeception("Erro ao excluir o pedido: " + ex.getMessage());
         }
-
-        if (pedidoParaDeletar != null) {
-            orders.remove(pedidoParaDeletar);
-            orderDao.update(orders);
-        }
-    }
     }
     public float calcularTotalDosItens(float valor_item1, float valor_item2, boolean promotion) {
         float total = valor_item1 + valor_item2; // Inicialize a variável total com a soma dos valores dos itens

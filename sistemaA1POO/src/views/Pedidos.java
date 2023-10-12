@@ -7,10 +7,11 @@ package views;
 import Controllers.ProductController;
 import Controllers.OrderController;
 import Controllers.StockController;
+import Exceptions.ModelNotCreatedExeception;
 import Models.Order;
 import Models.Product;
 import Models.Stock;
-
+import Enums.Type;
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -18,6 +19,8 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,8 +35,8 @@ public class Pedidos extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
 
-        fillProductComboBox(jComboBox_TipoSalgado, "Comida");
-        fillProductComboBox(jComboBox_TipoSuco, "Bebida");
+        fillProductComboBox(jComboBox_TipoSalgado, Enums.Type.FOOD);
+        fillProductComboBox(jComboBox_TipoSuco, Enums.Type.DRINK);
     }
 
     /**
@@ -215,20 +218,7 @@ public class Pedidos extends javax.swing.JDialog {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-//    private void jButton_AnotarActionPerformed(java.awt.event.ActionEvent evt) {
-//        int NPedido = Integer.parseInt(jTextField_NPedido.getText());
-//        String tipoSalgado = jComboBox_TipoSalgado.getSelectedItem().toString();
-//        String tipoRefresco = jComboBox_TipoSuco.getSelectedItem().toString();
-//        float total = ''
-//        jCheckBox_EhPromocao.addItemListener(new ItemListener() {
-//            @Override
-//            public void itemStateChanged(ItemEvent e) {
-//                if(e.getStateChange() == ItemEvent.SELECTED) {
-//                    //subtrair da variável valor total -R$1,00
-//                }
-//            }
-//        });
-//    }
+
 
     private void jButton_AnotarActionPerformed(java.awt.event.ActionEvent evt) {
         try {
@@ -245,10 +235,10 @@ public class Pedidos extends javax.swing.JDialog {
             String str_salgado = jComboBox_TipoSalgado.getSelectedItem().toString();
             String str_bebida = jComboBox_TipoSuco.getSelectedItem().toString();
             Double valorComida = productController.ValorProduto(str_salgado, 1);
-            Double valorBebida = productController.ValorProduto(str_bebida,2);
+            Double valorBebida = productController.ValorProduto(str_bebida,1);
             float valorComidaFloat = valorComida.floatValue();
             float valorBebidaFloat = valorBebida.floatValue();
-            Float preco = orderController.calcularTotalDosItens(valorComidaFloat, valorBebidaFloat, promocao);
+            float preco = orderController.calcularTotalDosItens(valorComidaFloat, valorBebidaFloat, promocao);
 
             ArrayList<Product> lista_produto = new ArrayList<Product>();
 
@@ -269,17 +259,12 @@ public class Pedidos extends javax.swing.JDialog {
                 JOptionPane.showMessageDialog(this, "Bebida não cadastrada.");
                 return;
             }
-
+            System.out.println(lista_produto);
             orderController.add(new Order(pedido, lista_produto, promocao, preco));
-
             jTextField_NPedido.setText("");
-
-
             JOptionPane.showMessageDialog(this, "Produto registrado com sucesso.");
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao registrar o produto. Verifique os valores inseridos.");
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao registrar o produto.");
+            JOptionPane.showMessageDialog(this, "Erro ao registrar o produto." + ex.getMessage());
         }
     }
     private void jButton_ListarActionPerformed(java.awt.event.ActionEvent evt){
@@ -296,7 +281,11 @@ public class Pedidos extends javax.swing.JDialog {
 
 
         for (Order order : orders) {
-            modelo.addRow(new Object[]{order.id, order.products, order.isPromotion, order.total});
+            if (order.products.size() == 2) {
+                Product salgado = order.products.get(0);
+                Product bebida = order.products.get(1);
+                modelo.addRow(new Object[]{order.id, salgado, bebida, order.isPromotion, order.total});
+            }
         }
 
         jTable2.setModel(modelo);
@@ -314,6 +303,7 @@ public class Pedidos extends javax.swing.JDialog {
                     jComboBox_TipoSuco.setSelectedItem(order.products);
                     jCheckBox_EhPromocao.setSelected(order.isPromotion);
 
+
                 }
             }
 
@@ -321,36 +311,27 @@ public class Pedidos extends javax.swing.JDialog {
 
     }
 
-    private void jButton_Editar1ActionPerformed(java.awt.event.ActionEvent evt){//GEN-FIRST:event_jButton_EditarActionPerformed
-        //DELETAR
+    private void jButton_Editar1ActionPerformed(java.awt.event.ActionEvent evt) {
         int numeroPedidoParaDeletar = Integer.parseInt(jTextField_NPedido.getText());
         OrderController orderController = new OrderController();
-        orderController.deleteByNumeroPedido(numeroPedidoParaDeletar);
-
-        JOptionPane.showMessageDialog(this, "Pedido deletado com sucesso.");
-
+        try {
+            orderController.deleteByNumeroPedido(numeroPedidoParaDeletar);
+            JOptionPane.showMessageDialog(this, "Pedido deletado com sucesso.");
+        } catch (ModelNotCreatedExeception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao deletar o pedido: " + ex.getMessage());
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, "Erro ao deletar o pedido: " + ex.getMessage());
+        }
     }//GEN-LAST:event_jButton_EditarActionPerformed
 
     private void jButton_EditarActionPerformed(java.awt.event.ActionEvent evt) {
         try {
-            int numeroPedido = Integer.parseInt(jTextField_NPedido.getText()); // Obtém o número do pedido a ser editado
-            OrderController orderController = new OrderController();
-
-            // Use a função getById para buscar o pedido com base no número do pedido
-            Order pedidoParaEditar = orderController.getById(numeroPedido);
-
-            if (pedidoParaEditar != null) {
-
-                orderController.update(pedidoParaEditar);
-
-                JOptionPane.showMessageDialog(this, "Pedido editado com sucesso.");
-            } else {
-                JOptionPane.showMessageDialog(this, "Pedido não encontrado.");
-            }
-        } catch (NumberFormatException ex) {
-            JOptionPane.showMessageDialog(this, "Número de pedido inválido.");
+            int numeroPedidoParaDeletar = Integer.parseInt(jTextField_NPedido.getText());
+            OrderController ordecontroller = new OrderController();
+            Order order = ordecontroller.getById(numeroPedidoParaDeletar);
+            ordecontroller.update(order);
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(this, "Erro ao editar o pedido.");
+            Logger.getLogger(Estoque.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -364,15 +345,14 @@ public class Pedidos extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox_TipoSucoActionPerformed
 
-    private void fillProductComboBox(JComboBox<Product> comboBox, String type) {
+    private void fillProductComboBox(JComboBox<Product> comboBox, Enums.Type type) {
         ProductController productController = new ProductController();
         ArrayList<Product> products = productController.get();
 
-        // Limpar a ComboBox antes de adicionar os produtos
         comboBox.removeAllItems();
 
         for (Product product : products) {
-            if (product.type.equals(type)) {
+            if (product.type == type) {
                 comboBox.addItem(product);
             }
         }
