@@ -11,7 +11,6 @@ import Exceptions.InvalidQuantityExeception;
 import Exceptions.ModelNotCreatedExeception;
 import Models.Product;
 import Models.Stock;
-
 import javax.swing.*;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
@@ -260,12 +259,12 @@ public class Produto extends javax.swing.JDialog {
         // Excluir
         try {
             int id = Integer.parseInt(jTextField_NPedido.getText());
-//            Type tipo = jComboBox_TipoSalgado.getSelectedItem()
+            Enums.Type tipo = mapTipoStringToEnum(jComboBox_TipoSalgado.getSelectedItem().toString());
             String name_product = jTextField_NPedido2.getText();
             String descricao = jTextField_NPedido3.getText();
             float preco = Float.parseFloat(jTextField_NPedido1.getText());
             ProductController productController = new ProductController();
-            Product searchProduct = new Product(id ,name_product, descricao, null, preco);
+            Product searchProduct = new Product(id ,name_product, descricao, tipo, preco);
             Product foundProduct = productController.getByProduct(searchProduct);
             System.out.println(foundProduct);
             productController.delete(foundProduct);
@@ -294,16 +293,16 @@ public class Produto extends javax.swing.JDialog {
         try{
 //      Editar pedido
             int id = Integer.parseInt(jTextField_NPedido.getText());
-            // Type tipo = jComboBox_TipoSalgado
+            Enums.Type tipo = mapTipoStringToEnum(jComboBox_TipoSalgado.getSelectedItem().toString());
             String descricao = jTextField_NPedido3.getText();
             String productName = jTextField_NPedido2.getText();
             float preco = Float.parseFloat(jTextField_NPedido1.getText());
             ProductController productController = new ProductController();
-            Product searchProduct = new Product(id, productName, descricao, null, preco);
+            Product searchProduct = new Product(id, productName, descricao, tipo, preco);
             Product foundProduct = productController.getByProduct(searchProduct);
             foundProduct.price = preco;
             foundProduct.description = descricao;
-//            foundProduct.type = tipo;
+            foundProduct.type = tipo;
             productController.update(foundProduct);
             jTextField_NPedido.setText("");
             jTextField_NPedido1.setText("");
@@ -326,14 +325,14 @@ public class Produto extends javax.swing.JDialog {
                 return;
             }
             int id = Integer.parseInt(jTextField_NPedido.getText());
-//        Type tipo = jComboBox_TipoSalgado
+            Enums.Type tipo = mapTipoStringToEnum(jComboBox_TipoSalgado.getSelectedItem().toString());
             String descricao = jTextField_NPedido3.getText();
             String nomeProduto = jTextField_NPedido2.getText();
             float preco = Float.parseFloat(jTextField_NPedido1.getText());
 
             ProductController productController = new ProductController();
 
-            productController.add(new Product(id, nomeProduto, descricao, Enums.Type.DRINK, preco));
+            productController.add(new Product(id, nomeProduto, descricao, tipo, preco));
 
             jTextField_NPedido.setText("");
             jTextField_NPedido1.setText("");
@@ -380,12 +379,21 @@ public class Produto extends javax.swing.JDialog {
                     jTextField_NPedido3.setText(product.description);
                     jTextField_NPedido2.setText(product.name);
                     jTextField_NPedido1.setText(String.valueOf(product.price));
-//                    jComboBox_TipoSalgado.setSelectedItem(product.type);
+                    jComboBox_TipoSalgado.setSelectedItem(product.type);
 
                 }
             }
 
         });
+    }
+    private Enums.Type mapTipoStringToEnum(String tipoString) {
+        if (tipoString.equals("Bebida")) {
+            return Enums.Type.DRINK;
+        } else if (tipoString.equals("Salgado")) {
+            return Enums.Type.FOOD;
+        } else {
+            return null;
+        }
     }
     /**
      * @param args the command line arguments
